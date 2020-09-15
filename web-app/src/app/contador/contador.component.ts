@@ -14,11 +14,11 @@ export class ContadorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  contarClique = () => {
+  contarClique = (): void => {
     this.contador++;
   }
 
-  diminuirClique = () => {
+  diminuirClique = (): void => {
     if (this.contador == 0) return;
     this.contador--;
   }
