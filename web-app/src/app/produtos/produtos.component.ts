@@ -1,13 +1,13 @@
 import { Component, OnInit, PipeTransform} from '@angular/core';
 
-interface Product {
+export interface Product {
   name: string;
   price: number;
   description: string;
   rating: number;
 }
 
-const PRODUCTS: Product[] = [
+var PRODUCTS: Product[] = [
   {
     name: 'Xbox One',
     price: 2100.00,
@@ -34,13 +34,8 @@ const PRODUCTS: Product[] = [
   }
 ]
 
-function search(text: string, pipe: PipeTransform): Product[] {
-  return PRODUCTS.filter(country => {
-    const term = text.toLowerCase();
-    return country.name.toLowerCase().includes(term)
-        || pipe.transform(country.price).includes(term)
-        || pipe.transform(country.description).includes(term);
-  });
+export function addProduct(product: Product): void {
+  PRODUCTS.push(product);
 }
 
 @Component({
@@ -51,11 +46,15 @@ function search(text: string, pipe: PipeTransform): Product[] {
 
 export class ProdutosComponent implements OnInit {
   public products: Product[]
-  currentRate = 10
 
   constructor() {
     this.products = PRODUCTS;
   };
+
+  deleteProduct(product: Product): void {
+    let products = this.products;
+    this.products = products.filter((p) => p !== product)
+  }
 
   ngOnInit(): void {
   }
